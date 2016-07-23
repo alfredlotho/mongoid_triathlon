@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  o: 
+  'n': MyString
+  d: 1.5
+  u: MyString
+
+two:
+  o: 
+  'n': MyString
+  d: 1.5
+  u: MyString
