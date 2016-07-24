@@ -1,20 +1,16 @@
 class Address
-  include Mongoid::Document
-  field :city, type: String
-  field :state, type: String
-  field :location, type: Point
-
+  
   attr_accessor :city, :state, :location
 
-  def initialize(city, state, location)
+  def initialize(city = nil, state = nil, location = nil)
     @city = city
     @state = state
-    @location = location
+    @location = location.nil? ? Point.new(0,0) : location
   end
 
   def mongoize
     case @location
-    when Point then {:city=>@city, :state=>@state, :loc=>@location.mongoize}
+    when Point then {:city=>city, :state=>@state, :loc=>@location.mongoize}
     when Hash then {:city=>@city, :state=>@state, :loc=>@location}
     end      
   end
