@@ -22,7 +22,8 @@ module Triresults
 
     #bootstraps mongoid within applications -- like rails console
     Mongoid.load!('./config/mongoid.yml')
-
+    config.eager_load_paths += %W( #{config.root}/app/services )
+    
     #mongoid gem configures mongoid as default model generator
     #this can make it explicit or switch back to active_record default
     #config.generators {|g| g.orm :mongoid}
