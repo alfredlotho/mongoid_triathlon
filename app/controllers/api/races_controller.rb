@@ -14,9 +14,16 @@ module Api
       end
     end
 
+    rescue_from ActionController::UnknownFormat do |exception|
+      @msg = "woops: we do not support that content-type[#{request.accept}]"
+      render plain: @msg, status: 415
+    end
+
     def index
       if !request.accept || request.accept == "*/*"
-        render plain: "/api/races, offset=[#{params[:offset]}], limit=[#{params[:limit]}]"
+        offset = ", offset=[#{params[:offset]}]" if !params[:offset].nil?
+        limit = ", limit=[#{params[:limit]}]" if !params[:limit].nil?
+        render plain: "/api/races#{offset}#{limit}"
       else
         @races = Race.all.order_by(:date => "desc")
       end
